@@ -8,6 +8,13 @@ The application is built with 3 microservices:
 
 It exposes a REST API using [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway).
 
+It also includes grpc middlewares to support metrics (via [Prometheus](https://prometheus.io/)) and tracing (via [Zipkin](https://zipkin.io/)).
+
+Launching the docker-compose, it will launch Prometheus and Zipkin:
+
+- [Prometheus dashboard](http://localhost:9090)
+- [Zipkin dashboard](http://localhost:9411)
+
 ## Run the demo
 
 Execute the docker-compose:

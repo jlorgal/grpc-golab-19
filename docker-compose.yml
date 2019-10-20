@@ -9,12 +9,20 @@ services:
     command: /usr/bin/author
     environment:
       AUTHOR_ADDRESS: :4040
+      AUTHOR_TRACERREPORTERURL: http://zipkin:9411/api/v2/spans
+      AUTHOR_TRACERSERVICENAME: author
+      AUTHOR_TRACERSERVICETARGET: author:4040
+      AUTHOR_METRICSTARGET: :9999
 
   book:
     image: grpc-golab-19
     command: /usr/bin/book
     environment:
       BOOK_ADDRESS: :4041
+      BOOK_TRACERREPORTERURL: http://zipkin:9411/api/v2/spans
+      BOOK_TRACERSERVICENAME: book
+      BOOK_TRACERSERVICETARGET: book:4041
+      BOOK_METRICSTARGET: :9999
 
   compose:
     image: grpc-golab-19
@@ -23,6 +31,10 @@ services:
       COMPOSE_ADDRESS: :4042
       COMPOSE_AUTHORTARGET: author:4040
       COMPOSE_BOOKTARGET: book:4041
+      COMPOSE_TRACERREPORTERURL: http://zipkin:9411/api/v2/spans
+      COMPOSE_TRACERSERVICENAME: compose
+      COMPOSE_TRACERSERVICETARGET: compose:4042
+      COMPOSE_METRICSTARGET: :9999
     ports:
       - 4042:4042
 
@@ -34,3 +46,15 @@ services:
       API_COMPOSETARGET: compose:4042
     ports:
       - 8080:8080
+
+  prometheus:
+    image: prom/prometheus:v2.13.0
+    ports:
+      - 9090:9090
+    volumes:
+     - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+  zipkin:
+    image: openzipkin/zipkin:2.17.2
+    ports:
+      - 9411:9411
