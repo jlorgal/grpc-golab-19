@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package compose.proto;
+
+service ComposeService {
+  rpc GetAuthor(GetAuthorRequest) returns (GetAuthorResponse);
+}
+
+message GetAuthorRequest {
+  int64 id = 1;
+}
+
+message GetAuthorResponse {
+  int64 id = 1;
+  string name = 2;
+  repeated Book books = 3;
+}
+
+message Book {
+  int64 id = 1;
+  string name = 2;
+}

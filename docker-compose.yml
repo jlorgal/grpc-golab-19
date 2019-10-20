@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  author:
+    image: grpc-golab-19
+    build:
+      context: .
+    command: /usr/bin/author
+    environment:
+      AUTHOR_ADDRESS: :4040
+
+  book:
+    image: grpc-golab-19
+    command: /usr/bin/book
+    environment:
+      BOOK_ADDRESS: :4041
+
+  compose:
+    image: grpc-golab-19
+    command: /usr/bin/compose
+    environment:
+      COMPOSE_ADDRESS: :4042
+      COMPOSE_AUTHORTARGET: author:4040
+      COMPOSE_BOOKTARGET: book:4041
+    ports:
+      - 4042:4042
