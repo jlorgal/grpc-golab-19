@@ -6,6 +6,8 @@ The application is built with 3 microservices:
 
 ![Architecture](doc/architecture.png)
 
+It exposes a REST API using [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway).
+
 ## Run the demo
 
 Execute the docker-compose:
@@ -43,4 +45,10 @@ The expected result is:
     }
   ]
 }
+```
+
+In order to test the REST API:
+
+```
+curl -v http://localhost:8080/authors/2
 ```

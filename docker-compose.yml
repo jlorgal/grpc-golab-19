@@ -25,3 +25,12 @@ services:
       COMPOSE_BOOKTARGET: book:4041
     ports:
       - 4042:4042
+
+  api:
+    image: grpc-golab-19
+    command: /usr/bin/api
+    environment:
+      API_ADDRESS: :8080
+      API_COMPOSETARGET: compose:4042
+    ports:
+      - 8080:8080
